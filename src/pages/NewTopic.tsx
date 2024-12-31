@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { supabase } from '../lib/supabase';
@@ -26,6 +25,8 @@ export function NewTopic() {
 
   const { mutate: createTopic, isPending } = useMutation({
     mutationFn: async ({ title, content }: { title: string; content: string }) => {
+      if (!category) throw new Error('Category not found');
+
       const { data, error } = await supabase
         .from('forum_topics')
         .insert({
@@ -56,7 +57,7 @@ export function NewTopic() {
 
       <div className="bg-white rounded-xl shadow-sm p-6">
         <TopicForm
-          onSubmit={createTopic}
+          onSubmit={(data) => createTopic(data)}
           isSubmitting={isPending}
         />
       </div>

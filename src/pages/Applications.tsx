@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { FileText, Filter, Search } from 'lucide-react';
+import { useState } from 'react';
+import { Filter, Search } from 'lucide-react';
 import { ApplicationsTable } from '../features/applications/components/ApplicationsTable';
 import { ApplicationFilters } from '../features/applications/components/ApplicationFilters';
 import { ApplicationStats } from '../features/applications/components/ApplicationStats';

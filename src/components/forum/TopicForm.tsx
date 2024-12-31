@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -11,7 +10,7 @@ const topicSchema = z.object({
 type TopicFormData = z.infer<typeof topicSchema>;
 
 interface TopicFormProps {
-  onSubmit: (data: TopicFormData) => Promise<void>;
+  onSubmit: (data: { title: string; content: string }) => void;
   isSubmitting: boolean;
 }
 

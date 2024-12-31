@@ -2,6 +2,15 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import type { User } from '@supabase/supabase-js';
 
+interface SignUpParams {
+  email: string;
+  password: string;
+  metadata?: {
+    userType: 'candidate' | 'company';
+    companyName?: string;
+  };
+}
+
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -30,24 +39,14 @@ export function useAuth() {
     if (error) throw error;
   };
 
-  const signUp = async ({ 
-    email, 
-    password,
-    userType = 'candidate',
-    companyName = ''
-  }: { 
-    email: string; 
-    password: string;
-    userType?: 'candidate' | 'company';
-    companyName?: string;
-  }) => {
+  const signUp = async (params: SignUpParams) => {
     const { error } = await supabase.auth.signUp({
-      email: email.trim().toLowerCase(),
-      password,
+      email: params.email.trim().toLowerCase(),
+      password: params.password,
       options: {
         data: {
-          userType,
-          ...(userType === 'company' ? { companyName } : {})
+          userType: params.metadata?.userType,
+          ...(params.metadata?.userType === 'company' ? { companyName: params.metadata?.companyName } : {})
         }
       }
     });

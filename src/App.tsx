@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Header } from './components/layout/Header';
@@ -45,9 +44,9 @@ export default function App() {
         <ThemeProvider>
           <Router>
             <AuthProvider>
-              <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col transition-colors">
+              <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col transition-colors">
                 <Header />
-                <main className="flex-1 container mx-auto px-4 py-8">
+                <main className="flex-1">
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/jobs" element={<Jobs />} />

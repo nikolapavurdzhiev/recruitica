@@ -1,6 +1,6 @@
 # Recruitica - Your Recruitment Career Platform
 
-![Recruitica](https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&h=400)
+<img src="src/assets/recruitica-logo.png" alt="Recruitica" width="200"/>
 
 Recruitica is a modern recruitment platform designed to connect recruitment professionals with their next career opportunity. Built with React, TypeScript, and Supabase, it offers a comprehensive suite of features for both recruiters and candidates.
 
@@ -149,6 +149,23 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For support, email support@recruitica.com or join our [Discord community](https://discord.gg/recruitica).
+
+## Development Notes
+- If you encounter blank pages or console errors, try:
+  - Disabling ad blockers for localhost:5173
+  - Using Incognito/Private mode
+  - Whitelisting the development URL in your security extensions
+
+## Recent Updates (December 31, 2023)
+- Added Recruitica logo to header and README
+- Fixed TypeScript type safety issues in Header component
+- Added support for various image formats (SVG, JPG, PNG)
+- Improved development setup documentation
+- Added troubleshooting notes for ad blocker issues
+- Implemented new Hero banner with responsive design
+- Fixed type safety in Auth, Jobs, and Forum components
+- Improved form handling in TopicForm component
+- Updated application filtering logic
 
 ---
 

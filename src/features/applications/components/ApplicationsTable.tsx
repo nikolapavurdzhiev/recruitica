@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Building2, Calendar, ArrowRight, MessageSquare } from 'lucide-react';
 
@@ -11,8 +10,20 @@ interface ApplicationsTableProps {
   };
 }
 
+interface Application {
+  id: string;
+  position: string;
+  company: string;
+  status: string;
+  appliedDate: string;
+  lastUpdate: string;
+  nextStep: string;
+  type: string;
+  statusColor: string;
+}
+
 export function ApplicationsTable({ search, filters }: ApplicationsTableProps) {
-  const applications = [
+  const applications: Application[] = [
     {
       id: '1',
       position: 'Senior Tech Recruiter',
@@ -23,20 +34,29 @@ export function ApplicationsTable({ search, filters }: ApplicationsTableProps) {
       nextStep: 'Technical Interview - Feb 20',
       type: 'full-time',
       statusColor: 'bg-green-100 text-green-800'
-    },
-    // Add more applications...
+    }
   ];
 
-  const getStatusColor = (status: string) => {
-    const colors = {
+  const getStatusColor = (status: string): string => {
+    const colors: Record<string, string> = {
       'Pending': 'bg-gray-100 text-gray-800',
       'Reviewing': 'bg-yellow-100 text-yellow-800',
       'Interview': 'bg-green-100 text-green-800',
       'Offer': 'bg-blue-100 text-blue-800',
       'Rejected': 'bg-red-100 text-red-800'
     };
-    return colors[status as keyof typeof colors] || colors.Pending;
+    return colors[status] || colors['Pending'];
   };
+
+  const filteredApplications = applications
+    .filter(app => {
+      const searchLower = search.toLowerCase();
+      return app.position.toLowerCase().includes(searchLower) ||
+             app.company.toLowerCase().includes(searchLower);
+    })
+    .filter(app => !filters.status || app.status === filters.status)
+    .filter(app => !filters.type || app.type === filters.type)
+    .filter(app => !filters.date || app.appliedDate.includes(filters.date));
 
   return (
     <div className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -53,7 +73,7 @@ export function ApplicationsTable({ search, filters }: ApplicationsTableProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {applications.map((application) => (
+            {filteredApplications.map((application) => (
               <tr key={application.id} className="hover:bg-gray-50">
                 <td className="px-6 py-4">
                   <Link
