@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Briefcase } from 'lucide-react';
 import { mockJobs } from '../features/jobs/data/mockJobs';
 import { JobSearch } from '../features/jobs/components/JobSearch';

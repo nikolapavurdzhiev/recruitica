@@ -9,12 +9,9 @@ export interface Job {
   description: string;
   posted_at: string;
   skills: string[];
-  requirements: string[];
-  responsibilities: string[];
-  benefits: string[];
-  company_logo?: string;
-  cover_image?: string;
-  work_type?: 'remote' | 'hybrid' | 'office';
+  requirements?: string[];
+  responsibilities?: string[];
+  benefits?: string[];
 }
 
 export interface JobFilters {

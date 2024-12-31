@@ -162,6 +162,10 @@ For support, email support@recruitica.com or join our [Discord community](https:
 - Added support for various image formats (SVG, JPG, PNG)
 - Improved development setup documentation
 - Added troubleshooting notes for ad blocker issues
+- Implemented new Hero banner with responsive design
+- Fixed type safety in Auth, Jobs, and Forum components
+- Improved form handling in TopicForm component
+- Updated application filtering logic
 
 ---
 

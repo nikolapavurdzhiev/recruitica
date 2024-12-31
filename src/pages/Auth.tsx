@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Building2, User, ArrowRight } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 
 type AuthMode = 'signin' | 'signup-candidate' | 'signup-company';
+
+interface AuthError extends Error {
+  message: string;
+}
 
 export function Auth() {
   const [mode, setMode] = useState<AuthMode>('signin');
@@ -16,7 +20,7 @@ export function Auth() {
   const { signIn, signUp } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
@@ -36,13 +40,18 @@ export function Auth() {
         });
       }
       navigate('/dashboard');
-    } catch (err: any) {
-      if (err.message === 'User already registered') {
-        setError('An account with this email already exists. Please sign in instead.');
-      } else if (err.message?.includes('Invalid login credentials')) {
-        setError('Invalid email or password. Please try again.');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        const authError = err as AuthError;
+        if (authError.message === 'User already registered') {
+          setError('An account with this email already exists. Please sign in instead.');
+        } else if (authError.message?.includes('Invalid login credentials')) {
+          setError('Invalid email or password. Please try again.');
+        } else {
+          setError(authError.message || 'An error occurred. Please try again.');
+        }
       } else {
-        setError(err.message || 'An error occurred. Please try again.');
+        setError('An unexpected error occurred. Please try again.');
       }
     } finally {
       setIsSubmitting(false);
