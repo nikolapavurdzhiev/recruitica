@@ -1,6 +1,6 @@
 # Recruitica - Your Recruitment Career Platform
 
-<img src="src/assets/recruitica-logo.svg" alt="Recruitica" width="200"/>
+<img src="src/assets/recruitica-logo.png" alt="Recruitica" width="200"/>
 
 Recruitica is a modern recruitment platform designed to connect recruitment professionals with their next career opportunity. Built with React, TypeScript, and Supabase, it offers a comprehensive suite of features for both recruiters and candidates.
 
