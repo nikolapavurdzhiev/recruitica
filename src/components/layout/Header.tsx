@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { UserCircle, Menu, X, Building2 } from 'lucide-react';
+import { UserCircle, Menu, X } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { SlideMenu } from './SlideMenu';
 import { ThemeToggle } from '../ui/ThemeToggle';
+import recruiticaLogo from '../../assets/recruitica-logo.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ export function Header() {
   ];
 
   // Format email to prevent overflow
-  const formatEmail = (email: string) => {
+  const formatEmail = (email: string | undefined) => {
     if (!email) return '';
     if (email.length > 20) {
       return `${email.substring(0, 17)}...`;
@@ -35,9 +36,12 @@ export function Header() {
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
-              <Link to="/" className="flex items-center space-x-2">
-                <Building2 className="h-8 w-8 text-indigo-600" />
-                <span className="text-2xl font-bold text-indigo-600">Recruitica</span>
+              <Link to="/" className="flex items-center">
+                <img 
+                  src={recruiticaLogo} 
+                  alt="Recruitica" 
+                  className="h-8 w-auto"
+                />
               </Link>
               <div className="hidden md:ml-10 md:flex md:space-x-8">
                 {navigation.map((item) => (
@@ -67,8 +71,11 @@ export function Header() {
                   <div className="h-8 w-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
                     <UserCircle className="h-6 w-6 text-gray-600 dark:text-gray-300" />
                   </div>
-                  <span className="max-w-[150px] truncate text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white" title={user.email}>
-                    {formatEmail(user.email)}
+                  <span 
+                    className="max-w-[150px] truncate text-sm text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white" 
+                    title={user?.email || ''}
+                  >
+                    {formatEmail(user?.email)}
                   </span>
                 </button>
               ) : (
